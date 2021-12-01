@@ -8,7 +8,7 @@ public class CarArraysTest {
 
   @Before
   public void setUp() throws Exception {
-    carArrays = new Carlist();
+    carArrays = new CarLinkedList();
     for (int i = 0; i < 100; i++) {
       carArrays.add(new Car("Model" + i, i));
     }
