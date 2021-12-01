@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CarArraysTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2021-11-30T08:27:31" hostname="KZN-WKS0427" time="0.013">
+  <properties/>
+  <testcase name="remove" classname="CarArraysTest" time="0.009"/>
+  <testcase name="whenIndexOutOfBoundsException" classname="CarArraysTest" time="0.0"/>
+  <testcase name="removeAt" classname="CarArraysTest" time="0.0"/>
+  <testcase name="get" classname="CarArraysTest" time="0.0"/>
+  <testcase name="size" classname="CarArraysTest" time="0.0"/>
+  <testcase name="clear" classname="CarArraysTest" time="0.0"/>
+  <testcase name="whenAddedCarinIndexIntoLasPosition" classname="CarArraysTest" time="0.0"/>
+  <testcase name="whenAddedCarinIndexIntoFirstPosition" classname="CarArraysTest" time="0.001"/>
+  <testcase name="whenNonExistentElementRemovedThenReturnFalse" classname="CarArraysTest" time="0.0"/>
+  <testcase name="whenAddedCarinIndex" classname="CarArraysTest" time="0.0"/>
+  <testcase name="WhenAddedNewCarSizeMustBe101" classname="CarArraysTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
