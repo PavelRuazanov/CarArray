@@ -10,7 +10,7 @@ public class CarLinkedList implements CarArrays {
   }
 
   @Override
-  public void add(Car car) {
+  public boolean add(Car car) {
     if (size == 0) {
       Node node = new Node(null, car, null);
       first = node;
@@ -21,6 +21,7 @@ public class CarLinkedList implements CarArrays {
       secondLast.next = last;
     }
     size++;
+    return true;
 
   }
 
@@ -113,5 +114,15 @@ public class CarLinkedList implements CarArrays {
       this.value = value;
       this.next = next;
     }
+  }
+
+  @Override
+  public boolean contains(Car car) {
+    for (int i = 0; i < size; i++) {
+      if (getNode(i).value.equals(car)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

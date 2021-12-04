@@ -1,14 +1,14 @@
 public class CarHashSet implements CarSet {
 
-  private int size;
+  private int size = 0;
   private static final int INITIAL_CAPACITY = 16;
-  private static final double LOAD_FACTOR = 0.75;
   private Entry[] array = new Entry[INITIAL_CAPACITY];
+  private static final double LOAD_FACTOR = 0.75;
 
   @Override
   public boolean add(Car car) {
-    if (size >= (array.length * LOAD_FACTOR)){
-      increaseArray();
+    if (size >= (array.length * LOAD_FACTOR)) {
+      increaseArrays();
     }
     boolean result = add(car, array);
     if (result) {
@@ -18,15 +18,14 @@ public class CarHashSet implements CarSet {
   }
 
   private boolean add(Car car, Entry[] dst) {
-    int position = getElementPosition(car, dst.length);
+    int position = getArraysPosition(car, dst.length);
     if (dst[position] == null) {
-      Entry entry = new Entry(car, null);
-      dst[position] = entry;
+      dst[position] = new Entry(car, null);
       return true;
     } else {
       Entry existedElement = dst[position];
       while (true) {
-        if (existedElement.value.equals(car)) {
+        if (dst[position].value.equals(car)) {
           return false;
         } else if (existedElement.next == null) {
           existedElement.next = new Entry(car, null);
@@ -40,28 +39,40 @@ public class CarHashSet implements CarSet {
 
   @Override
   public boolean remove(Car car) {
-    int position = getElementPosition(car, array.length);
-    if (array[position] == null){
+    int position = getArraysPosition(car, array.length);
+    if (array[position] == null) {
       return false;
     }
-    Entry secondPosition = array[position];
-    Entry lastPosition = array[position].next;
-    if (secondPosition.value.equals(car)) {
-      array[position] = lastPosition;
+    Entry secondLast = array[position];
+    Entry last = array[position].next;
+    if (secondLast.value.equals(car)) {
+      array[position] = last;
       size--;
       return true;
     }
-    while (lastPosition != null) {
-      if (lastPosition.value.equals(car)) {
-        secondPosition.next = lastPosition.next;
+    while (last != null) {
+      if (last.value.equals(car)) {
+        secondLast.next = last.next;
         size--;
         return true;
       } else {
-        secondPosition = lastPosition;
-        lastPosition = lastPosition.next;
+        secondLast = last;
+        last = last.next;
       }
     }
     return false;
+  }
+
+  private void increaseArrays() {
+    Entry[] newArrays = new Entry[array.length * 2];
+    for (Entry entry : array) {
+      Entry existedElement = entry;
+      while (existedElement != null) {
+        add(existedElement.value, newArrays);
+        existedElement = existedElement.next;
+      }
+    }
+    array = newArrays;
   }
 
   @Override
@@ -71,9 +82,8 @@ public class CarHashSet implements CarSet {
 
   @Override
   public void clear() {
-    array = new Entry[INITIAL_CAPACITY];
     size = 0;
-
+    array = new Entry[INITIAL_CAPACITY];
   }
 
   private static class Entry {
@@ -87,20 +97,24 @@ public class CarHashSet implements CarSet {
     }
   }
 
-  private void increaseArray() {
-    Entry []newArray = new Entry[array.length * 2];
-    for (Entry entry : array) {
-      Entry existedElement = entry;
-      while (existedElement != null) {
-        add(existedElement.value,newArray);
-        existedElement = existedElement.next;
-      }
-    }
-    array = newArray;
-  }
-
-  private int getElementPosition(Car car, int arrayLength) {
+  private int getArraysPosition(Car car, int arrayLength) {
     return Math.abs(car.hashCode() % arrayLength);
   }
 
+  @Override
+  public boolean contains(Car car) {
+    int position = getArraysPosition(car, array.length);
+    if (array[position] == null) {
+      return false;
+    }
+    Entry secondLast = array[position];
+    while (secondLast != null) {
+      if (secondLast.value.equals(car)) {
+        return true;
+      } else {
+        secondLast = secondLast.next;
+      }
+    }
+    return false;
+  }
 }

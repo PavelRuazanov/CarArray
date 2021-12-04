@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class CarList implements CarArrays {
+public class CarArrayList implements CarArrays {
 
   private int size = 0;
   private Car[] cars = new Car[10];
@@ -12,12 +12,13 @@ public class CarList implements CarArrays {
   }
 
   @Override
-  public void add(Car car) {
+  public boolean add(Car car) {
     if (size >= cars.length) {
       cars = Arrays.copyOf(cars, cars.length * 2);
     }
     cars[size] = car;
     size++;
+    return true;
 
   }
 
@@ -70,5 +71,15 @@ public class CarList implements CarArrays {
     }
     cars[index] = car;
     size++;
+  }
+
+  @Override
+  public boolean contains(Car car) {
+    for (int i = 0; i < size; i++) {
+      if (cars[i].equals(car)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
