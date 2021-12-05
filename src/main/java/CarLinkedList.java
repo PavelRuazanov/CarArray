@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class CarLinkedList implements CarArrays {
 
   private Node first;
@@ -11,6 +13,7 @@ public class CarLinkedList implements CarArrays {
 
   @Override
   public boolean add(Car car) {
+    int size = 0;
     if (size == 0) {
       Node node = new Node(null, car, null);
       first = node;
@@ -124,5 +127,25 @@ public class CarLinkedList implements CarArrays {
       }
     }
     return false;
+  }
+
+  @Override
+  public Iterator<Car> iterator() {
+    return new Iterator<Car>() {
+
+      private int index = 0;
+
+      @Override
+      public boolean hasNext() {
+        return index < size;
+      }
+
+      @Override
+      public Car next() {
+        Node node = getNode(index);
+        index++;
+        return node.value ;
+      }
+    };
   }
 }

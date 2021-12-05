@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class CarArrayList implements CarArrays {
 
@@ -81,5 +82,22 @@ public class CarArrayList implements CarArrays {
       }
     }
     return false;
+  }
+
+  @Override
+  public Iterator<Car> iterator() {
+    return new Iterator<Car>() {
+
+      int index = 0;
+      @Override
+      public boolean hasNext() {
+        return index < size;
+      }
+
+      @Override
+      public Car next() {
+        return cars[index++];
+      }
+    };
   }
 }

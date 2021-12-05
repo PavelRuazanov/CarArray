@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CarSetTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-04T12:46:07" hostname="WIN-PMQ4KS7D0RT" time="0.007">
-  <properties/>
-  <testcase name="contains" classname="CarSetTest" time="0.007"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
